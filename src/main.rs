@@ -6,21 +6,28 @@ mod pstreew;
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
+    /// show pid
     #[arg(short = 'p', long, action)]
     show_pid: bool,
+    /// specify pid
     #[arg(short = 'P', long)]
     pid: Option<u32>,
+    /// show parnet process
     #[arg(short = 's', long, action)]
     parent: bool,
+    /// sort by pid
     #[arg(short = 'n', long, action)]
     sort: bool,
+    /// hide arguments.
     #[arg(short = 'd', long, action, default_value_t = false)]
     hide_arg: bool,
+    /// show process full path
     #[arg(short = 'l', long, action, default_value_t = false)]
     show_full_path: bool,
 }
 
 fn main() {
+    let _ = colored::control::set_virtual_terminal(true);
     let args = Args::parse();
     let cfg = PrintConfig::new()
         .show_pid(args.show_pid)

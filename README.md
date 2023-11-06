@@ -8,12 +8,14 @@ A windows process tree viewer in console.
 Usage: pstreew.exe [OPTIONS]
 
 Options:
-  -p, --show-pid
-  -P, --pid <PID>
-  -s, --parent
-  -n, --sort
-  -h, --help       Print help
-  -V, --version    Print version
+  -p, --show-pid        show pid
+  -P, --pid <PID>       specify pid
+  -s, --parent          show parnet process
+  -n, --sort            sort by pid
+  -d, --hide-arg        hide arguments
+  -l, --show-full-path  show process full path
+  -h, --help            Print help
+  -V, --version         Print version
 ```
 
 ## Examples
