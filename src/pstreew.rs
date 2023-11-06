@@ -348,8 +348,7 @@ pub fn get_proc_info(
             pbi.as_mut_ptr() as *mut std::ffi::c_void,
             std::mem::size_of::<PROCESS_BASIC_INFORMATION>() as u32,
             std::ptr::null_mut(),
-        )
-        .unwrap();
+        )?;
         // get peb
         let pbi = pbi.assume_init();
         let mut peb = std::mem::MaybeUninit::<PEB>::uninit();
@@ -359,8 +358,7 @@ pub fn get_proc_info(
             peb.as_mut_ptr() as *mut std::ffi::c_void,
             std::mem::size_of::<PEB>(),
             Some(std::ptr::null_mut()),
-        )
-        .unwrap();
+        )?;
         // get process parameters
         let peb = peb.assume_init();
         let mut proc_params =
@@ -371,8 +369,7 @@ pub fn get_proc_info(
             proc_params.as_mut_ptr() as *mut std::ffi::c_void,
             std::mem::size_of::<RTL_USER_PROCESS_PARAMETERS>(),
             Some(std::ptr::null_mut()),
-        )
-        .unwrap();
+        )?;
         // get command line
         let proc_params = proc_params.assume_init();
         let cmdline_len = proc_params.CommandLine.Length as usize;
@@ -383,8 +380,7 @@ pub fn get_proc_info(
             cmdline.as_mut_ptr() as *mut std::ffi::c_void,
             cmdline_len,
             Some(std::ptr::null_mut()),
-        )
-        .unwrap();
+        )?;
         process_info.arg = PWSTR::from_raw(cmdline.as_mut_ptr()).to_string()?;
         // get image path
         let img_path_len = proc_params.ImagePathName.Length as usize;
